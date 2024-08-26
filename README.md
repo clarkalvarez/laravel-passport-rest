@@ -1,66 +1,161 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+**Laravel Passport Authentication and REST API**
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+🚀 Introduction
+This Laravel project leverages Laravel Passport for API authentication and REST API implementation. Passport provides a comprehensive OAuth2 server implementation, including personal access tokens and password grants.
 
-## About Laravel
+📋 Requirements
+PHP: >= 8
+Composer
+Laravel: >= 11.x
+Database: MySQL
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+🛠 Installation
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+```
+composer install
+```
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Copy the .env.example file to .env and update your environment settings:
 
-## Learning Laravel
+```
+cp .env.example .env
+```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Open the .env file and configure your database settings:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+```
+APP_NAME=local
+APP_ENV=local
+APP_KEY=
+DB_CONNECTION=mysql
+DB_HOST=localhost
+DB_PORT=3306
+DB_DATABASE=your_database
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Generate Application Key
 
-## Laravel Sponsors
+```
+php artisan key:generate
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Install Passport via Composer:
 
-### Premium Partners
+```
+composer require laravel/passport
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+Setup Passport tables:
 
-## Contributing
+```
+php artisan passport:install
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Would you like to run all pending database migrations? (yes/no) [yes]: yes
+```
 
-## Code of Conduct
+Generate Personal Client keys:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```
+php artisan passport:client --personal
 
-## Security Vulnerabilities
+What should we name the personal access client? [local Personal Access Client]:y
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Migrate database:
 
-## License
+```
+php artisan migrate
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Migrate test database:
+
+```
+php artisan migrate --env=testing
+```
+
+🛠 Usage
+
+Authentication Routes
+
+URL: /api/login
+Method: POST
+Purpose: Login the user to access protected routes
+Usage:
+
+```
+Body
+{
+  "email": "test@gmail.com",
+  "password": "123456781"
+}
+Response:
+{
+  "response_code": "200",
+  "status": "success",
+  "message": "Login successful.",
+  "user_info": {
+    "id": 1,
+    "name": "test",
+    "email": "test@gmail.com",
+    "email_verified_at": null,
+    "created_at": "2024-08-26T02:08:24.000000Z",
+    "updated_at": "2024-08-26T02:08:24.000000Z"
+  },
+  "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5Y2RhZGMxMS1hOTY1LTRmYTktODVlYi0zZWUxNmU1OTdjYzEiLCJqdGkiOiIzYTZhMGZmMDZiMDM0YThiZjU5MDVmMGJkNWZhNjU1OTZhZmYyNzhhNzcwMjBmMjUwZDdjMjQ1ZTM0OGU0YzFiZmJhMTZkMTQxYjcxMzNkZSIsImlhdCI6MTcyNDYzODEyMi44NDc4NzksIm5iZiI6MTcyNDYzODEyMi44NDc4ODEsImV4cCI6MTc1NjE3NDEyMi43ODk4OTIsInN1YiI6IjEiLCJzY29wZXMiOltdfQ.JGB3fmWrsUUxLjBBKklAWlP1PJCBVcq80NgShx7Xr9q-cguUWewjkaGMztShS_-3kLdm4cGUYHJDtBvNEdxeWa87wCXU_55yt74uPLg6L1YwIWPj0QWxtCdYoTo-q5T0opHuVxhu2-d7LtukNV9AVDcd3nv-nialjYJ-hOIVKdSLPQxQAvCsVFfkWimY6qFI33eLy3ULDfm3Rb67fckfhf2AF4xYWNE_fP3CvwOnF8t03Rn0Oi9Zpb0lb5k1fwKKKwu1GQRkvXdKAPQ_dRaYw5kg-B9ok0z58-_n0tR_kUIix0daJpkm3RjEjKy0Qqp7e1DmWqd50-sFN_S7d01Xwr5EVImH7UHYf4frlLNqzjWqJvsFLfKWFKXQmqHQt9Pw-BOmkB0I_UrYZuTK9Wfs9ZR4MhITuyrBfKzjFeavHwgBDBLKUwDkp53nRBYCJMxH9WTXAlTATOk7l1doBQQ3pOL9rfaE4rNrNtkQSi-V0CWY35-carpiNbisCrGs6LEYfJE6nTkRXL0Bck2nCYzJ8hu3uyEfDBWDS8jU9gRwqKEHj8jul7m2cMSaV5noNKq73QGoY7AcbK7jZ0Syt_X8pi45KK3tun44Y_thUf3RVHQ6EsyIP95qT46xho5k70unlbPK27si8fgon_w4SOUv_heZNqTXenWbD2NzeWobhO8"
+}
+```
+
+URL: /api/register
+Method: POST
+Purpose: Register the user
+Usage:
+
+```
+Body
+{
+  "name": "test",
+  "email": "test@gmail.com",
+  "password": "123456781"
+}
+Response
+{
+  "response_code": "201",
+  "status": "success",
+  "message": "User registered successfully."
+}
+```
+
+🧪 Testing
+Copy the .env.example file to .env.testing and update your environment settings:
+
+```
+cp .env.example .env.testing
+```
+
+Open the .env.testing file and configure your database settings:
+
+```
+APP_NAME=testing
+APP_ENV=testing
+APP_KEY=
+DB_CONNECTION=mysql
+DB_HOST=localhost
+DB_PORT=3306
+DB_DATABASE=your_database
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
+```
+
+Generate Application Key
+
+```
+php artisan key:generate --env=testing
+```
+
+Run Tests
+
+```
+php artisan test
+```
