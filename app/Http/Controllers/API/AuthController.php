@@ -94,30 +94,5 @@ class AuthController extends Controller
             'status' => 'success',
             'message' => 'Logout successful.',
         ], 200);
-    }
-
-    /**
-     * Get the list of users.
-     */
-    public function userDetails()
-    {
-        try {
-            $userDataList = User::latest()->paginate(10);
-
-            return response()->json([
-                'response_code' => '200',
-                'status' => 'success',
-                'message' => 'User list retrieved successfully.',
-                'data_user_list' => $userDataList,
-            ], 200);
-        } catch (\Exception $e) {
-            \Log::error('Error fetching user list: ' . $e->getMessage());
-
-            return response()->json([
-                'response_code' => '500',
-                'status' => 'error',
-                'message' => 'Failed to retrieve user list.',
-            ], 500);
-        }
-    }
+    } 
 }
