@@ -27,6 +27,7 @@ Open the .env file and configure your database settings:
 APP_NAME=local
 APP_ENV=local
 APP_KEY=
+APP_DEBUG=true
 DB_CONNECTION=mysql
 DB_HOST=localhost
 DB_PORT=3306
@@ -77,11 +78,14 @@ php artisan migrate --env=testing
 
 🛠 Usage
 
-Authentication Routes
+**_Authentication Routes_**
 
 URL: /api/login
+
 Method: POST
+
 Purpose: Login the user to access protected routes
+
 Usage:
 
 ```
@@ -108,8 +112,11 @@ Response:
 ```
 
 URL: /api/register
+
 Method: POST
+
 Purpose: Register the user
+
 Usage:
 
 ```
@@ -127,6 +134,150 @@ Response
 }
 ```
 
+**_REST API Routes_**
+
+URL: /api/customers
+
+Method: GET
+
+Purpose: Get all the users
+
+Usage:
+
+```
+Auth: Bearer
+Response
+[
+  {
+    "id": 2,
+    "first_name": "John Clark",
+    "last_name": "Doe",
+    "age": 30,
+    "dob": "2024-08-14T00:00:00.000000Z",
+    "email": "john.doe@example.com",
+    "creation_date": "2024-08-26T12:00:00.000000Z",
+    "created_at": "2024-08-26T09:16:49.000000Z",
+    "updated_at": "2024-08-26T10:20:54.000000Z"
+  },
+  {
+    "id": 3,
+    "first_name": "John",
+    "last_name": "Doe",
+    "age": 30,
+    "dob": "1994-05-21T00:00:00.000000Z",
+    "email": "john.doe@example.com",
+    "creation_date": "2024-08-26T12:00:00.000000Z",
+    "created_at": "2024-08-26T09:18:01.000000Z",
+    "updated_at": "2024-08-26T09:18:01.000000Z"
+  },
+]
+```
+
+URL: /api/customers/{id}
+
+Method: GET
+
+Purpose: Get the user
+
+Usage:
+
+```
+Auth: Bearer
+Response
+  {
+    "id": 2,
+    "first_name": "John Clark",
+    "last_name": "Doe",
+    "age": 30,
+    "dob": "2024-08-14T00:00:00.000000Z",
+    "email": "john.doe@example.com",
+    "creation_date": "2024-08-26T12:00:00.000000Z",
+    "created_at": "2024-08-26T09:16:49.000000Z",
+    "updated_at": "2024-08-26T10:20:54.000000Z"
+  },
+```
+
+URL: /api/customers
+
+Method: POST
+
+Purpose: Create the user
+
+Usage:
+
+```
+Auth: Bearer
+Body:
+  {
+      "first_name": "John",
+      "last_name": "Doe",
+      "age": 30,
+      "dob": "1994-05-21",
+      "email": "john.doe@example.com",
+      "creation_date": "2024-08-26 12:00:00"
+  }
+Response
+  {
+    "first_name": "John",
+    "last_name": "Doe",
+    "age": 30,
+    "dob": "1994-05-21T00:00:00.000000Z",
+    "email": "john.doe@example.com",
+    "creation_date": "2024-08-26T12:00:00.000000Z",
+    "updated_at": "2024-08-26T10:31:37.000000Z",
+    "created_at": "2024-08-26T10:31:37.000000Z",
+    "id": 9
+  }
+```
+
+URL: /api/customers/{id}
+
+Method: PUT
+
+Purpose: Update the user
+
+Usage:
+
+```
+Auth: Bearer
+Body
+  {
+    "first_name": "Change Name",
+    "last_name": "Doe",
+    "age": 30
+  }
+Response
+  {
+    "id": 6,
+    "first_name": "Change Name",
+    "last_name": "Doe",
+    "age": 30,
+    "dob": "2024-08-09T00:00:00.000000Z",
+    "email": "clarkalvarezjohn@gmail.com",
+    "creation_date": "2024-08-26T09:47:41.000000Z",
+    "created_at": "2024-08-26T09:47:41.000000Z",
+    "updated_at": "2024-08-26T10:48:35.000000Z"
+  }
+```
+
+URL: /api/customers/{id}
+
+Method: DELETE
+
+Purpose: Delete the user
+
+Usage:
+
+```
+Auth: Bearer
+Response
+  {
+    "response_code": "200",
+    "status": "success",
+    "message": "Customer deleted successfully."
+  },
+```
+
 🧪 Testing
 Copy the .env.example file to .env.testing and update your environment settings:
 
@@ -139,6 +290,7 @@ Open the .env.testing file and configure your database settings:
 ```
 APP_NAME=testing
 APP_ENV=testing
+APP_DEBUG=true
 APP_KEY=
 DB_CONNECTION=mysql
 DB_HOST=localhost

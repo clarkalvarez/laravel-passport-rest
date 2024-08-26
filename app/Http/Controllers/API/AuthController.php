@@ -83,6 +83,20 @@ class AuthController extends Controller
     }
 
     /**
+     * Logout the user by revoking the access token.
+     */
+    public function logout(Request $request)
+    {
+        $request->user()->token()->revoke();
+
+        return response()->json([
+            'response_code' => '200',
+            'status' => 'success',
+            'message' => 'Logout successful.',
+        ], 200);
+    }
+
+    /**
      * Get the list of users.
      */
     public function userDetails()
