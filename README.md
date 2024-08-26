@@ -151,10 +151,10 @@ Response
   {
     "id": 2,
     "first_name": "John Clark",
-    "last_name": "Doe",
+    "last_name": "Clark",
     "age": 30,
     "dob": "2024-08-14T00:00:00.000000Z",
-    "email": "john.doe@example.com",
+    "email": "john.Clark@example.com",
     "creation_date": "2024-08-26T12:00:00.000000Z",
     "created_at": "2024-08-26T09:16:49.000000Z",
     "updated_at": "2024-08-26T10:20:54.000000Z"
@@ -162,10 +162,10 @@ Response
   {
     "id": 3,
     "first_name": "John",
-    "last_name": "Doe",
+    "last_name": "Clark",
     "age": 30,
     "dob": "1994-05-21T00:00:00.000000Z",
-    "email": "john.doe@example.com",
+    "email": "john.Clark@example.com",
     "creation_date": "2024-08-26T12:00:00.000000Z",
     "created_at": "2024-08-26T09:18:01.000000Z",
     "updated_at": "2024-08-26T09:18:01.000000Z"
@@ -187,10 +187,10 @@ Response
   {
     "id": 2,
     "first_name": "John Clark",
-    "last_name": "Doe",
+    "last_name": "Clark",
     "age": 30,
     "dob": "2024-08-14T00:00:00.000000Z",
-    "email": "john.doe@example.com",
+    "email": "john.Clark@example.com",
     "creation_date": "2024-08-26T12:00:00.000000Z",
     "created_at": "2024-08-26T09:16:49.000000Z",
     "updated_at": "2024-08-26T10:20:54.000000Z"
@@ -210,19 +210,19 @@ Auth: Bearer
 Body:
   {
       "first_name": "John",
-      "last_name": "Doe",
+      "last_name": "Clark",
       "age": 30,
       "dob": "1994-05-21",
-      "email": "john.doe@example.com",
+      "email": "john.Clark@example.com",
       "creation_date": "2024-08-26 12:00:00"
   }
 Response
   {
     "first_name": "John",
-    "last_name": "Doe",
+    "last_name": "Clark",
     "age": 30,
     "dob": "1994-05-21T00:00:00.000000Z",
-    "email": "john.doe@example.com",
+    "email": "john.Clark@example.com",
     "creation_date": "2024-08-26T12:00:00.000000Z",
     "updated_at": "2024-08-26T10:31:37.000000Z",
     "created_at": "2024-08-26T10:31:37.000000Z",
@@ -243,14 +243,14 @@ Auth: Bearer
 Body
   {
     "first_name": "Change Name",
-    "last_name": "Doe",
+    "last_name": "Clark",
     "age": 30
   }
 Response
   {
     "id": 6,
     "first_name": "Change Name",
-    "last_name": "Doe",
+    "last_name": "Clark",
     "age": 30,
     "dob": "2024-08-09T00:00:00.000000Z",
     "email": "clarkalvarezjohn@gmail.com",

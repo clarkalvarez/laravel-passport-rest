@@ -56,10 +56,10 @@ class CustomerApiTest extends TestCase
 
         $data = [
             'first_name' => 'John',
-            'last_name' => 'Doe',
+            'last_name' => 'Clark',
             'age' => 30,
             'dob' => $dob,
-            'email' => 'john.doe@example.com',
+            'email' => 'john.Clark@example.com',
             'creation_date' => $creation_date
         ];
 
@@ -68,10 +68,10 @@ class CustomerApiTest extends TestCase
         $response->assertStatus(201)
                 ->assertJsonFragment([
                     'first_name' => 'John',
-                    'last_name' => 'Doe',
+                    'last_name' => 'Clark',
                     'age' => 30,
                     'dob' => "{$dob}T00:00:00.000000Z",  
-                    'email' => 'john.doe@example.com'
+                    'email' => 'john.Clark@example.com'
                 ]);
     }
 
